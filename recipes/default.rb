@@ -65,6 +65,12 @@ execute 'update homebrew from github' do
   command "sudo -u #{node['current_user']} /usr/local/bin/brew update || true"
 end
 
+# checkout correct grails version
+execute 'checkout correct grails version' do
+  user noed['current_user']
+  command "cd /usr/local/Cellar && git checkout 9312992 /usr/local/Library/Formula/grails.rb"
+end
+
 node['homebrewalt']['cask_apps'].each do |app|
   homebrewalt_cask app
 end
